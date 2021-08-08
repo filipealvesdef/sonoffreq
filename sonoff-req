@@ -1,0 +1,33 @@
+#!/usr/bin/python
+import argparse
+from sonoffreq import Sonoff
+
+parser = argparse.ArgumentParser()
+options = parser.add_argument_group('OPTIONS')
+state = parser.add_argument_group('STATE')
+options.add_argument(
+    '--addr', '-a',
+    metavar='IP',
+    help='ip address of a sonoff on your local network',
+    required=True,
+)
+
+options.add_argument(
+    '--api-key', '-k',
+    metavar='KEY',
+    help='API key. If you don\'t know how to obtain this, take a look at: ' +
+    'https://pysonofflanr3.readthedocs.io/encryption.html#obtaining-the-api-key',
+    required=True,
+)
+
+state.add_argument(
+    'state',
+    nargs='?',
+    choices=['on', 'off'],
+    default='on',
+    help='State to switch the device (default: on)',
+)
+
+args = parser.parse_args()
+s = Sonoff(args.addr, args.api_key)
+s.switch(args.state)
