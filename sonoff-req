@@ -13,6 +13,13 @@ options.add_argument(
 )
 
 options.add_argument(
+    '--port', '-p',
+    metavar='PORT',
+    default=8081,
+    help='Port of the webserver running in the sonoff (default: 8081)',
+)
+
+options.add_argument(
     '--api-key', '-k',
     metavar='KEY',
     help='API key. If you don\'t know how to obtain this, take a look at: ' +
@@ -29,5 +36,5 @@ state.add_argument(
 )
 
 args = parser.parse_args()
-s = Sonoff(args.addr, args.api_key)
+s = Sonoff(args.addr, args.api_key, args.port)
 s.switch(args.state)

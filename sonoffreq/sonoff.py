@@ -8,8 +8,9 @@ import requests
 import time
 
 class Sonoff:
-    def __init__(self, addr, api_key):
+    def __init__(self, addr, api_key, port = 8081):
         self.addr = addr
+        self.port = port
         self.api_key = api_key
 
 
@@ -24,7 +25,7 @@ class Sonoff:
         ciphertext = cipher.encrypt(padded)
 
         requests.post(
-            f'http://{self.addr}:8081/zeroconf/switch',
+            f'http://{self.addr}:{self.port}/zeroconf/switch',
             headers={
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Accept': 'application/json',
