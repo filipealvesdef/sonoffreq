@@ -11,7 +11,7 @@ class Sonoff:
     def __init__(self, addr, api_key):
         self.addr = addr
         self.api_key = api_key
-        pass
+
 
     def switch(self, state):
         hash = MD5.new()
